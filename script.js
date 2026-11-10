@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const txt = inputBuscador.value.toLowerCase();
             cajaSugerencias.innerHTML = "";
             if (!txt) return;
-
+const jugadoresIntentados = [];
             const encontrados = jugadores.filter(j => 
                 j.nombre.toLowerCase().includes(txt) && !jugadoresIntentados.includes(j.nombre)
             );
