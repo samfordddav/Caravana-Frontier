@@ -249,4 +249,5 @@ document.addEventListener("DOMContentLoaded", () => {
                     cajaSugerencias.innerHTML = "";
                 });
                 cajaSugerencias.appendChild(item);
+          }
             });
