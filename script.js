@@ -238,7 +238,7 @@ const jugadoresIntentados = [];
             encontrados.forEach(j => {
                 const item = document.createElement("div");
                 item.className = "sugerencia-item";
-                const img = j.foto ? `<img src="${j.foto}" class="sugerencia-img" onerror="this.src='https://placehold.co'">` : '';
+                       const img = j.foto ? `<img src="${j.foto}" class="sugerencia-img" style="width:35px; height:35px; border-radius:4px; object-fit:cover; vertical-align:middle; margin-right:8px;" onerror="this.src='https://placehold.co'">` : '';
                 item.innerHTML = `${img}<span>${j.nombre}</span>`;
                 item.addEventListener("click", () => {
                     comprobarJugador(j);
@@ -250,4 +250,4 @@ const jugadoresIntentados = [];
         });
     }
 });
-generarRetosAleatorios();
+
