@@ -42,8 +42,6 @@ const jugadores = [
     { nombre: "Escavan Malice", equipo: "El Ogro", posicion: "Delantero", elemento: "Tierra", foto: "malice.webp", logoEquipo: "logo_ogro.webp" },
     { nombre: "Bash Lancer", equipo: "El Ogro", posicion: "Delantero", elemento: "Tierra", foto: "lancer.webp", logoEquipo: "logo_ogro.webp" },
     { nombre: "Mystral Callous", equipo: "El Ogro", posicion: "Delantero", elemento: "Tierra", foto: "callous.webp", logoEquipo: "logo_ogro.webp" },
-
-    // === VETERANOS ===
     { nombre: "Seymour Hillman", equipo: "Inazuma Eleven (Veteranos)", posicion: "Portero", elemento: "Tierra", foto: "hillman_j.webp", logoEquipo: "logo_inazuma_original.webp" },
     { nombre: "Charles Island", equipo: "Inazuma Eleven (Veteranos)", posicion: "Defensa", elemento: "Bosque", foto: "island.webp", logoEquipo: "logo_inazuma_original.webp" },
     { nombre: "Garret Hairtown", equipo: "Inazuma Eleven (Veteranos)", posicion: "Defensa", elemento: "Viento", foto: "hairtown.webp", logoEquipo: "logo_inazuma_original.webp" },
@@ -60,8 +58,6 @@ const jugadores = [
     { nombre: "Dom Foreman", equipo: "Inazuma Eleven (Veteranos)", posicion: "Centrocampista", elemento: "Tierra", foto: "foreman.webp", logoEquipo: "logo_inazuma_original.webp" },
     { nombre: "Slot MacHines", equipo: "Inazuma Eleven (Veteranos)", posicion: "Defensa", elemento: "Fuego", foto: "machines.webp", logoEquipo: "logo_inazuma_original.webp" },
     { nombre: "Bill Steakspear", equipo: "Inazuma Eleven (Veteranos)", posicion: "Defensa", elemento: "Tierra", foto: "steakspear.webp", logoEquipo: "logo_inazuma_original.webp" },
-
-    // === KIDS FC ===
     { nombre: "Herman Muller", equipo: "Kids FC", posicion: "Portero", elemento: "Viento", foto: "muller.webp", logoEquipo: "logo_kids_fc.webp" },
     { nombre: "Keth Claus", equipo: "Kids FC", posicion: "Defensa", elemento: "Viento", foto: "claus.webp", logoEquipo: "logo_kids_fc.webp" },
     { nombre: "Robert Silver", equipo: "Kids FC", posicion: "Defensa", elemento: "Viento", foto: "silver.webp", logoEquipo: "logo_kids_fc.webp" },
