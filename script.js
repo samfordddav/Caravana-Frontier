@@ -218,3 +218,63 @@ function cambiarDificultad(nivel) {
         document.getElementById("instrucciones-juego").innerText = "Modo seleccionado.";
     }
 }
+
+
+// Enlace para activar la barra de búsqueda de jugadores
+document.addEventListener("DOMContentLoaded", () => {
+    const inputBuscador = document.getElementById("buscador");
+    const cajaSugerencias = document.getElementById("sugerencias");
+    const inputEquipo = document.getElementById("buscador-equipo");
+    const cajaEquipo = document.getElementById("sugerencias-equipo");
+
+    if (inputBuscador && cajaSugerencias) {
+        inputBuscador.addEventListener("input", () => {
+            if (typeof jugadores === 'undefined') return;
+            const txt = inputBuscador.value.toLowerCase();
+            cajaSugerencias.innerHTML = "";
+            if (!txt) return;
+
+            const encontrados = jugadores.filter(j => 
+                j.nombre.toLowerCase().includes(txt) && !jugadoresIntentados.includes(j.nombre)
+            );
+            
+            encontrados.forEach(j => {
+                const item = document.createElement("div");
+                item.className = "sugerencia-item";
+                const img = j.foto ? `<img src="${j.foto}" class="sugerencia-img" onerror="this.src='https://placehold.co'">` : '';
+                item.innerHTML = `${img}<span>${j.nombre}</span>`;
+                item.addEventListener("click", () => {
+                    comprobarJugador(j);
+                    inputBuscador.value = "";
+                    cajaSugerencias.innerHTML = "";
+                });
+                cajaSugerencias.appendChild(item);
+            });
+        });
+    }
+
+    if (inputEquipo && cajaEquipo) {
+        inputEquipo.addEventListener("input", () => {
+            if (typeof jugadores === 'undefined') return;
+            const txt = inputEquipo.value.toLowerCase();
+            cajaEquipo.innerHTML = "";
+            if (!txt) return;
+
+            const encontrados = jugadores.filter(j => j.nombre.toLowerCase().includes(txt));
+            
+            encontrados.forEach(j => {
+                const item = document.createElement("div");
+                item.className = "sugerencia-item";
+                const img = j.foto ? `<img src="${j.foto}" class="sugerencia-img" onerror="this.src='https://placehold.co'">` : '';
+                item.innerHTML = `${img}<span>${j.nombre} (${j.equipo})</span>`;
+                item.addEventListener("click", () => {
+                    alert("Seleccionado: " + j.nombre);
+                    inputEquipo.value = "";
+                    cajaEquipo.innerHTML = "";
+                });
+                cajaEquipo.appendChild(item);
+            });
+        });
+    }
+});
+
