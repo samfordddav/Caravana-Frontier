@@ -73,7 +73,7 @@ const jugadores = [
     { nombre: "Karl Blue", equipo: "Kids FC", posicion: "Centrocampista", elemento: "Tierra", foto: "karl.webp", logoEquipo: "logo_kids_fc.webp" },
     { nombre: "Theakston Plank", equipo: "Kids FC", posicion: "Delantero", elemento: "Viento", foto: "plank.webp", logoEquipo: "logo_kids_fc.webp" },
     { nombre: "Ken Cake", equipo: "Kids FC", posicion: "Delantero", elemento: "Tierra", foto: "cake.webp", logoEquipo: "logo_kids_fc.webp" },
-    { nombre: "Mitch Grumble", equipo: "Kids FC", posicion: "Centrocampista", elemento: "Viento", foto: "grumble.webp", logoEquipo: "logo_kids_fc.webp" },
+    { nombre: "Mitch Grumble", equipo: "Kids FC", posicion: "Centrocampista", elemento: "Viento", foto: "grumble.webp", logoEquipo: "logo_kids_fc.webp" }
 ];
 
 let listaDesordenadaPorDia = [];
