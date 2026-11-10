@@ -76,7 +76,6 @@ const jugadores = [
     { nombre: "Mitch Grumble", equipo: "Kids FC", posicion: "Centrocampista", elemento: "Viento", foto: "grumble.webp", logoEquipo: "logo_kids_fc.webp" }
 ];
 const jugadoresIntentados = [];
-let jugadoresIntentados = [];
 let listaDesordenadaPorDia = [];
 let jugadorSecreto = null;
 let diaSeleccionado = null;
