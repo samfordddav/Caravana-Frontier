@@ -10,16 +10,13 @@
             --success: #28a745;
             --danger: #dc3545;
             --dark: #1e293b;
-            --light: #f8fafc;
         }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background-image: url('fondo.webp');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            background-repeat: no-repeat;
             color: var(--dark);
             margin: 0;
             padding: 20px;
@@ -28,53 +25,7 @@
             align-items: center;
             min-height: 100vh;
         }
-
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-        }
-
-        header h1 {
-            color: white;
-            margin: 0;
-        }
-
-        /* Menú de pestañas principal */
-        .pestanas-juego {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .btn-pestana {
-            padding: 12px 24px;
-            background: #e2e8f0;
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            flex: 1;
-            text-align: center;
-        }
-
-        .btn-pestana:hover {
-            background: #cbd5e1;
-        }
-
-        .btn-pestana.activa {
-            background: #f59e0b;
-            color: white;
-            border-color: #d97706;
-        }
-
-        .seccion-juego {
-            display: none;
+        .container {
             width: 100%;
             max-width: 800px;
             background: rgba(255, 255, 255, 0.95);
@@ -83,19 +34,40 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             box-sizing: border-box;
         }
-
-        .seccion-juego.activa {
-            display: block;
+        #pantalla-inicio {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
         }
-
-        /* Dificultad interna del Wordle */
+        .btn-menu-principal {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #f59e0b;
+            color: white;
+            border: 2px solid #d97706;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn-volver {
+            padding: 8px 16px;
+            background: #64748b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .seccion-juego { display: none; }
         .modos-dificultad {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-bottom: 20px;
         }
-
         .btn-modo {
             padding: 10px 20px;
             border: 2px solid #cbd5e1;
@@ -103,23 +75,18 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.2s;
         }
-
         .btn-modo.activo {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
         }
-
-        /* Calendario de días */
         .panel-dias {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
             gap: 8px;
             margin-bottom: 20px;
         }
-
         .btn-dia {
             padding: 12px;
             background: #e2e8f0;
@@ -127,49 +94,13 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            text-align: center;
-            transition: all 0.2s;
         }
-
-        .btn-dia:hover {
-            background: #cbd5e1;
-        }
-
-        .btn-dia.activo {
-            background: #64748b;
-            color: white;
-        }
-
-        .btn-dia.completado {
-            background: var(--success) !important;
-            color: white;
-        }
-
-        .instrucciones {
-            text-align: center;
-            font-weight: 500;
-            margin-bottom: 15px;
-            color: #475569;
-        }
-
-        .aviso-bloqueado {
-            display: none;
-            text-align: center;
-            padding: 20px;
-            background: #fee2e2;
-            color: #991b1b;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        /* Buscadores */
+        .btn-dia.activo { background: #64748b; color: white; }
+        .btn-dia.completado { background: var(--success) !important; color: white; }
         .buscador-zona {
-            display: none;
             position: relative;
             margin-bottom: 20px;
         }
-
         .input-buscar {
             width: 100%;
             padding: 12px;
@@ -178,7 +109,6 @@
             border-radius: 6px;
             font-size: 16px;
         }
-
         .sugerencias-caja {
             position: absolute;
             top: 100%;
@@ -186,14 +116,10 @@
             right: 0;
             background: white;
             border: 1px solid #cbd5e1;
-            border-top: none;
-            max-height: 200px;
+            max-height: 250px;
             overflow-y: auto;
             z-index: 10;
-            border-radius: 0 0 6px 6px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
-
         .sugerencia-item {
             padding: 10px;
             cursor: pointer;
@@ -201,125 +127,89 @@
             align-items: center;
             border-bottom: 1px solid #f1f5f9;
         }
-
-        .sugerencia-item:hover {
-            background: #f1f5f9;
-        }
-
-        .alerta-victoria {
-            display: none;
-            background: #dcfce7;
-            color: #14532d;
-            padding: 15px;
-            border-radius: 6px;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            border: 1px solid #cbd5e1;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        th {
-            background: #f1f5f9;
-            color: #475569;
-        }
-
+        .sugerencia-img { width: 35px; height: 35px; border-radius: 4px; object-fit: cover; margin-right: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #cbd5e1; padding: 10px; text-align: center; font-weight: bold; }
         .verde { background-color: #28a745 !important; color: white; }
         .rojo { background-color: #dc3545 !important; color: white; }
-
-        /* Contenedores de prueba para las secciones vacías */
-        .placeholder-seccion {
-            text-align: center;
-            padding: 40px 20px;
-            color: #475569;
+        .selector-alineacion {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            width: 100%;
+            border-radius: 6px;
+            border: 2px solid #cbd5e1;
         }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>⚡ Inazuma Eleven Wordle Diario ⚡</h1>
+        <h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.6);">⚡ Inazuma Eleven Wordle Diario ⚡</h1>
     </header>
 
-    <!-- PESTAÑAS PRINCIPALES DEL JUEGO -->
-    <div class="pestanas-juego">
-        <button class="btn-pestana activa" onclick="cambiarPestanaPrincipal('wordle-jugadores')">Adivinar Jugador</button>
-        <button class="btn-pestana" onclick="cambiarPestanaPrincipal('wordle-tecnicas')">Adivinar Supertécnicas</button>
-        <button class="btn-pestana" onclick="cambiarPestanaPrincipal('modificar-equipo')">Modificar tu Equipo</button>
-    </div>
-
-    <!-- SECCIÓN 1: ADIVINAR JUGADOR -->
-    <div id="sec-wordle-jugadores" class="seccion-juego activa">
-        <div class="modos-dificultad">
-            <button id="btn-facil" class="btn-modo activo" onclick="cambiarDificultad('facil')">Modo Diario</button>
-            <button id="btn-medio" class="btn-modo" onclick="cambiarDificultad('medio')">Modo Medio</button>
-            <button id="btn-imposible" class="btn-modo" onclick="cambiarDificultad('imposible')">Modo Imposible</button>
+    <div class="container">
+        <!-- PANTALLA PRINCIPAL -->
+        <div id="pantalla-inicio">
+            <h2>Selecciona un Modo de Juego</h2>
+            <button class="btn-menu-principal" onclick="irASeccion('sec-wordle-jugadores')">⚽ Adivinar Jugador</button>
+            <button class="btn-menu-principal" onclick="irASeccion('sec-wordle-tecnicas')">🔮 Adivinar Supertécnicas</button>
+            <button class="btn-menu-principal" onclick="irASeccion('sec-modificar-equipo')">📋 Modificar tu Equipo</button>
         </div>
 
-        <div id="instrucciones-juego" class="instrucciones">
-            Selecciona un día del panel inferior para empezar a jugar.
+        <!-- SECCIÓN 1: ADIVINAR JUGADOR -->
+        <div id="sec-wordle-jugadores" class="seccion-juego">
+            <button class="btn-volver" onclick="volverAlInicio()">← Volver al Menú</button>
+            <div class="modos-dificultad">
+                <button id="btn-facil" class="btn-modo activo" onclick="cambiarDificultad('facil')">Modo Diario</button>
+                <button id="btn-medio" class="btn-modo" onclick="cambiarDificultad('medio')">Modo Medio</button>
+                <button id="btn-imposible" class="btn-modo" onclick="cambiarDificultad('imposible')">Modo Imposible</button>
+            </div>
+            <div id="instrucciones-juego" style="text-align:center; font-weight:500; margin-bottom:15px;">
+                Selecciona un día del panel inferior para empezar.
+            </div>
+            <div id="grid-dias-calendario" class="panel-dias"></div>
+            
+            <div id="alerta-victoria" class="verde" style="display:none; padding:15px; border-radius:6px; text-align:center; margin-bottom:15px;">
+                🎉 ¡Excelente! ¡Has acertado el jugador secreto del día! 🎉
+            </div>
+
+            <div id="zona-buscador-jugador" class="buscador-zona" style="display:none;">
+                <input type="text" id="buscador" class="input-buscar" placeholder="Escribe el nombre de un jugador..." autocomplete="off">
+                <div id="sugerencias" class="sugerencias-caja"></div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr><th>Jugador</th><th>Equipo</th><th>Posición</th><th>Elemento</th></tr>
+                </thead>
+                <tbody id="lista-intentos"></tbody>
+            </table>
         </div>
 
-        <div id="aviso-modo-bloqueado" class="aviso-bloqueado">
-            ⚠️ Este modo estará disponible en próximas actualizaciones. ¡Juega al Modo Diario!
+        <!-- SECCIÓN 2: ADIVINAR SUPERTECNICAS -->
+        <div id="sec-wordle-tecnicas" class="seccion-juego">
+            <button class="btn-volver" onclick="volverAlInicio()">← Volver al Menú</button>
+            <h3>🔮 Adivina la Supertécnica</h3>
+            <div class="buscador-zona" style="display:block;">
+                <input type="text" id="buscador-tecnicas" class="input-buscar" placeholder="Busca una Supertécnica (Ej: Tornado de Fuego)...">
+            </div>
         </div>
 
-        <!-- El id correcto que espera el script.js -->
-        <div id="grid-dias-calendario" class="panel-dias"></div>
-
-        <div id="alerta-victoria" class="alerta-victoria">
-            🎉 ¡Excelente! ¡Has acertado el jugador secreto del día! 🎉
-        </div>
-
-        <div id="contenedor-buscador-juego" class="buscador-zona">
-            <input type="text" id="buscador" class="input-buscar" placeholder="Escribe el nombre de un jugador de Inazuma..." autocomplete="off">
-            <div id="sugerencias" class="sugerencias-caja"></div>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Jugador</th>
-                    <th>Equipo</th>
-                    <th>Posición</th>
-                    <th>Elemento</th>
-                </tr>
-            </thead>
-            <tbody id="lista-intentos"></tbody>
-        </table>
-    </div>
-
-    <!-- SECCIÓN 2: ADIVINAR SUPERTECNICAS -->
-    <div id="sec-wordle-tecnicas" class="seccion-juego">
-        <div class="placeholder-seccion">
-            <h2>🔮 Adivinar Supertécnicas</h2>
-            <p>Sección en desarrollo. Aquí podrás adivinar las técnicas diarias por su afinidad, tipo y PT.</p>
-        </div>
-    </div>
-
-    <!-- SECCIÓN 3: MODIFICAR TU EQUIPO -->
-    <div id="sec-modificar-equipo" class="seccion-juego">
-        <div class="placeholder-seccion">
-            <h2>⚽ Modificar tu Equipo</h2>
-            <p>Sección en desarrollo. Aquí podrás gestionar tu alineación ideal con tus jugadores adivinados.</p>
+        <!-- SECCIÓN 3: MODIFICAR TU EQUIPO -->
+        <div id="sec-modificar-equipo" class="seccion-juego">
+            <button class="btn-volver" onclick="volverAlInicio()">← Volver al Menú</button>
+            <h3>📋 Gestión de tu Alineación</h3>
+            <select class="selector-alineacion">
+                <option value="4-4-2">Formación Básica (4-4-2)</option>
+                <option value="3-4-3">Formación Triángulo Muerto (3-4-3)</option>
+                <option value="4-3-3">Formación Ataque Fénix (4-3-3)</option>
+                <option value="5-3-2">Formación Zona Absoluta (5-3-2)</option>
+            </select>
+            <p style="text-align:center; color:#64748b;">Aquí aparecerán los jugadores que vayas desbloqueando cada día en el Modo Diario para construir tu XI ideal.</p>
         </div>
     </div>
 
-    <!-- CARGA DE LOS ARCHIVOS DEL JUEGO -->
     <script src="jugadores.js"></script>
     <script src="script.js"></script>
-
 </body>
 </html>
