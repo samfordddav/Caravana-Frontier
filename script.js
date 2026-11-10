@@ -158,10 +158,6 @@ if (buscador) {
 }
 
 function comprobarJugador(jugador) {
-    if (!jugadorSecreto) {
-        alert("Por favor, selecciona un día primero.");
-        return;
-    }
 
     const fila = document.createElement("tr");
     
