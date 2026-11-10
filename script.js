@@ -75,6 +75,7 @@ const jugadores = [
     { nombre: "Ken Cake", equipo: "Kids FC", posicion: "Delantero", elemento: "Tierra", foto: "cake.webp", logoEquipo: "logo_kids_fc.webp" },
     { nombre: "Mitch Grumble", equipo: "Kids FC", posicion: "Centrocampista", elemento: "Viento", foto: "grumble.webp", logoEquipo: "logo_kids_fc.webp" }
 ];
+let jugadoresIntentados = [];
 let listaDesordenadaPorDia = [];
 let jugadorSecreto = null;
 let diaSeleccionado = null;
