@@ -3,7 +3,26 @@ let jugadorSecreto = null;
 let diaSeleccionado = null;
 let jugadoresIntentados = [];
 
+// Cambiar entre las pantallas principales del juego
+function cambiarPestanaPrincipal(idSeccion) {
+    document.querySelectorAll('.seccion-juego').forEach(sec => sec.classList.remove('activa'));
+    document.querySelectorAll('.btn-pestana').forEach(btn => btn.classList.remove('activa'));
+    
+    if(idSeccion === 'wordle-jugadores') {
+        document.getElementById('sec-wordle-jugadores').classList.add('activa');
+        event.target.classList.add('activa');
+    } else if(idSeccion === 'wordle-tecnicas') {
+        document.getElementById('sec-wordle-tecnicas').classList.add('activa');
+        event.target.classList.add('activa');
+    } else if(idSeccion === 'modificar-equipo') {
+        document.getElementById('sec-modificar-equipo').classList.add('activa');
+        event.target.classList.add('activa');
+    }
+}
+
+// Generar los retos matemáticamente para los 30 días usando la base de datos
 function generarRetosAleatorios() {
+    if (typeof jugadores === 'undefined' || jugadores.length === 0) return;
     let copiaJugadores = [...jugadores];
     listaDesordenadaPorDia = [];
     let semilla = 12345; 
@@ -23,6 +42,7 @@ function inicializarCalendarioDias() {
     grid.innerHTML = "";
     if (listaDesordenadaPorDia.length === 0) generarRetosAleatorios();
 
+    // Dibuja los 30 días del Wordle Diario
     for (let i = 1; i <= 30; i++) {
         const btn = document.createElement("button");
         btn.className = "btn-dia";
@@ -35,6 +55,7 @@ function inicializarCalendarioDias() {
 
 function seleccionarDiaJuego(dia) {
     diaSeleccionado = dia;
+    if (listaDesordenadaPorDia.length === 0) generarRetosAleatorios();
     jugadorSecreto = listaDesordenadaPorDia[dia - 1];
     jugadoresIntentados = [];
     
@@ -48,7 +69,7 @@ function seleccionarDiaJuego(dia) {
     if (contenedorBuscador) contenedorBuscador.style.display = "block";
     
     const instrucHtml = document.getElementById("instrucciones-juego");
-    if (instrucHtml) instrucHtml.innerText = `🎯 Reto del Día ${dia} activado. ¡Intenta adivinarlo!`;
+    if (instrucHtml) instrucHtml.innerText = `🎯 Reto del Día ${dia} activado. ¡Adivina el jugador oculto!`;
 
     document.querySelectorAll(".btn-dia").forEach(b => b.classList.remove("activo"));
     const btnActivo = document.getElementById(`btn-dia-${dia}`);
@@ -66,6 +87,7 @@ function inicializarBuscadorJuego() {
     if (!buscador || !sugerenciasDiv) return;
 
     buscador.addEventListener("input", () => {
+        if (typeof jugadores === 'undefined') return;
         const texto = buscador.value.toLowerCase();
         sugerenciasDiv.innerHTML = "";
         if (!texto) return;
@@ -130,7 +152,7 @@ function cambiarDificultad(nivel) {
     const btnMedio = document.getElementById("btn-medio");
     const btnImp = document.getElementById("btn-imposible");
     const avisoBloq = document.getElementById("aviso-modo-bloqueado");
-    const panelDias = document.getElementById("panel-secciones-dias");
+    const panelDias = document.getElementById("grid-dias-calendario");
     const contenedorBuscador = document.getElementById("contenedor-buscador-juego");
     const instrucHtml = document.getElementById("instrucciones-juego");
 
@@ -141,8 +163,8 @@ function cambiarDificultad(nivel) {
 
     if (nivel === 'facil') {
         if (btnFacil) btnFacil.classList.add("activo");
-        if (panelDias) panelDias.style.display = "block";
-        if (instrucHtml) instrucHtml.innerText = "Selecciona un día del panel superior para empezar a jugar.";
+        if (panelDias) panelDias.style.display = "grid";
+        if (instrucHtml) instrucHtml.innerText = "Selecciona un día del panel inferior para empezar a jugar.";
         inicializarCalendarioDias();
     } else {
         const btnNivel = document.getElementById(`btn-${nivel}`);
