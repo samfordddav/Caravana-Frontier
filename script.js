@@ -37,21 +37,34 @@ function seleccionarDiaJuego(dia) {
     diaSeleccionado = dia;
     jugadorSecreto = listaDesordenadaPorDia[dia - 1];
     jugadoresIntentados = [];
-    document.getElementById("lista-intentos").innerHTML = "";
-    document.getElementById("alerta-victoria").style.display = "none";
-    document.getElementById("contenedor-buscador-juego").style.display = "block";
-    document.getElementById("instrucciones-juego").innerText = `🎯 Reto del Día ${dia} activado.`;
+    
+    const listaHtml = document.getElementById("lista-intentos");
+    if (listaHtml) listaHtml.innerHTML = "";
+    
+    const alertaHtml = document.getElementById("alerta-victoria");
+    if (alertaHtml) alertaHtml.style.display = "none";
+    
+    const contenedorBuscador = document.getElementById("contenedor-buscador-juego");
+    if (contenedorBuscador) contenedorBuscador.style.display = "block";
+    
+    const instrucHtml = document.getElementById("instrucciones-juego");
+    if (instrucHtml) instrucHtml.innerText = `🎯 Reto del Día ${dia} activado. ¡Intenta adivinarlo!`;
+
     document.querySelectorAll(".btn-dia").forEach(b => b.classList.remove("activo"));
     const btnActivo = document.getElementById(`btn-dia-${dia}`);
     if (btnActivo) btnActivo.classList.add("activo");
 }
 
-window.onload = function() { inicializarCalendarioDias(); };
+window.addEventListener('DOMContentLoaded', () => {
+    inicializarCalendarioDias();
+    inicializarBuscadorJuego();
+});
 
-const buscador = document.getElementById("buscador");
-const sugerenciasDiv = document.getElementById("sugerencias");
+function inicializarBuscadorJuego() {
+    const buscador = document.getElementById("buscador");
+    const sugerenciasDiv = document.getElementById("sugerencias");
+    if (!buscador || !sugerenciasDiv) return;
 
-if (buscador) {
     buscador.addEventListener("input", () => {
         const texto = buscador.value.toLowerCase();
         sugerenciasDiv.innerHTML = "";
@@ -64,7 +77,8 @@ if (buscador) {
         filtrados.forEach(j => {
             const div = document.createElement("div");
             div.className = "sugerencia-item";
-            div.innerHTML = `<img src="${j.foto}" style="width:25px; height:25px; margin-right:8px; vertical-align:middle;">${j.nombre}`;
+            const imgHtml = j.foto ? `<div style="width:25px; height:25px; border-radius:4px; overflow:hidden; display:inline-block; vertical-align:middle; margin-right:8px;"><img src="${j.foto}" style="width:100%; height:100%; object-fit:cover;"></div>` : '';
+            div.innerHTML = `${imgHtml}${j.nombre}`;
             div.addEventListener("click", () => {
                 comprobarJugador(j);
                 buscador.value = "";
@@ -76,28 +90,66 @@ if (buscador) {
 }
 
 function comprobarJugador(jugador) {
-    if (!jugadorSecreto) return alert("Selecciona un día.");
+    if (!jugadorSecreto) return alert("Por favor, selecciona un día primero.");
     jugadoresIntentados.push(jugador.nombre);
+    
+    const listaIntentos = document.getElementById("lista-intentos");
+    if (!listaIntentos) return;
+    
     const fila = document.createElement("tr");
     
     const tdJugador = document.createElement("td");
-    tdJugador.innerHTML = `<img src="${jugador.foto}" style="width:55px; height:55px;"><br>${jugador.nombre}`;
+    const imgHtml = jugador.foto ? `<div style="width:55px; height:55px; border-radius:8px; overflow:hidden; margin:0 auto 4px auto;"><img src="${jugador.foto}" style="width:100%; height:100%; object-fit:cover;"></div>` : '';
+    tdJugador.innerHTML = `${imgHtml}${jugador.nombre}`;
     tdJugador.className = (jugador.nombre === jugadorSecreto.nombre) ? "verde" : "rojo";
     fila.appendChild(tdJugador);
 
-    function crearCelda(valorIntento, valorSecreto, contenido) {
+    function crearCelda(valorIntento, valorSecreto, innerContent) {
         const td = document.createElement("td");
-        td.innerHTML = contenido || valorIntento;
+        td.innerHTML = innerContent || valorIntento;
         td.className = (valorIntento === valorSecreto) ? "verde" : "rojo";
         return td;
     }
 
-    fila.appendChild(crearCelda(jugador.equipo, jugadorSecreto.equipo, `<img src="${jugador.logoEquipo}" style="width:30px; height:30px;"><br>${jugador.equipo}`));
+    const logoHtml = jugador.logoEquipo ? `<div style="width:30px; height:30px; margin:0 auto 4px auto; display:flex; align-items:center; justify-content:center;"><img src="${jugador.logoEquipo}" style="width:100%; height:100%; object-fit:contain;"></div>` : '';
+    fila.appendChild(crearCelda(jugador.equipo, jugadorSecreto.equipo, `${logoHtml}<div>${jugador.equipo}</div>`));
     fila.appendChild(crearCelda(jugador.posicion, jugadorSecreto.posicion));
     fila.appendChild(crearCelda(jugador.elemento, jugadorSecreto.elemento));
-    document.getElementById("lista-intentos").insertBefore(fila, document.getElementById("lista-intentos").firstChild);
+    listaIntentos.insertBefore(fila, listaIntentos.firstChild);
 
     if (jugador.nombre === jugadorSecreto.nombre) {
-        document.getElementById("alerta-victoria").style.display = "block";
+        const alertaVic = document.getElementById("alerta-victoria");
+        if (alertaVic) alertaVic.style.display = "block";
+        const btnGanado = document.getElementById(`btn-dia-${diaSeleccionado}`);
+        if (btnGanado) btnGanado.classList.add("completado");
+    }
+}
+
+function cambiarDificultad(nivel) {
+    const btnFacil = document.getElementById("btn-facil");
+    const btnMedio = document.getElementById("btn-medio");
+    const btnImp = document.getElementById("btn-imposible");
+    const avisoBloq = document.getElementById("aviso-modo-bloqueado");
+    const panelDias = document.getElementById("panel-secciones-dias");
+    const contenedorBuscador = document.getElementById("contenedor-buscador-juego");
+    const instrucHtml = document.getElementById("instrucciones-juego");
+
+    if (btnFacil) btnFacil.classList.remove("activo");
+    if (btnMedio) btnMedio.classList.remove("activo");
+    if (btnImp) btnImp.classList.remove("activo");
+    if (avisoBloq) avisoBloq.style.display = "none";
+
+    if (nivel === 'facil') {
+        if (btnFacil) btnFacil.classList.add("activo");
+        if (panelDias) panelDias.style.display = "block";
+        if (instrucHtml) instrucHtml.innerText = "Selecciona un día del panel superior para empezar a jugar.";
+        inicializarCalendarioDias();
+    } else {
+        const btnNivel = document.getElementById(`btn-${nivel}`);
+        if (btnNivel) btnNivel.classList.add("activo");
+        if (panelDias) panelDias.style.display = "none";
+        if (contenedorBuscador) contenedorBuscador.style.display = "none";
+        if (avisoBloq) avisoBloq.style.display = "block";
+        if (instrucHtml) instrucHtml.innerText = "Modo seleccionado.";
     }
 }
