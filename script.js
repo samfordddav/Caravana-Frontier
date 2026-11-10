@@ -232,8 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
             encontrados.forEach(j => {
                 const item = document.createElement("div");
                 item.className = "sugerencia-item";
-                      const img = j.foto ? `<img src="${j.foto}" class="sugerencia-img">` : '';
-                item.addEventListener("click", () => {
+                              const img = j.foto ? `<img src="${j.foto}" class="sugerencia-img">` : '';
                     comprobarJugador(j);
                     inputBuscador.value = "";
                     cajaSugerencias.innerHTML = "";
