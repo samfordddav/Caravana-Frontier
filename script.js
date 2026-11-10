@@ -36,6 +36,8 @@ const jugadores = [
 let listaDesordenadaPorDia = [];
 let jugadorSecreto = null;
 let diaSeleccionado = null;
+// NUEVO: Array para guardar los nombres de los jugadores ya intentados en el día actual
+let jugadoresIntentados = [];
 
 function generarRetosAleatorios() {
     let copiaJugadores = [...jugadores];
@@ -75,6 +77,9 @@ function seleccionarDiaJuego(dia) {
     diaSeleccionado = dia;
     jugadorSecreto = listaDesordenadaPorDia[dia - 1];
     
+    // NUEVO: Vaciar la lista de bloqueados al cambiar de día
+    jugadoresIntentados = [];
+    
     document.getElementById("lista-intentos").innerHTML = "";
     document.getElementById("alerta-victoria").style.display = "none";
     document.getElementById("contenedor-buscador-juego").style.display = "block";
@@ -99,7 +104,11 @@ if (buscador) {
         sugerenciasDiv.innerHTML = "";
         if (!texto) return;
 
-        const filtrados = jugadores.filter(j => j.nombre.toLowerCase().includes(texto));
+        // CORREGIDO: Filtramos para que NO aparezcan los jugadores que ya están en 'jugadoresIntentados'
+        const filtrados = jugadores.filter(j => 
+            j.nombre.toLowerCase().includes(texto) && 
+            !jugadoresIntentados.includes(j.nombre)
+        );
         
         filtrados.forEach(j => {
             const div = document.createElement("div");
@@ -121,6 +130,9 @@ function comprobarJugador(jugador) {
         alert("Por favor, selecciona un día primero.");
         return;
     }
+
+    // NUEVO: Añadir el jugador al array de bloqueados para que no vuelva a salir en el buscador
+    jugadoresIntentados.push(jugador.nombre);
 
     const fila = document.createElement("tr");
     
@@ -172,4 +184,3 @@ function cambiarDificultad(nivel) {
         document.getElementById("instrucciones-juego").innerText = "Modo seleccionado.";
     }
 }
-
