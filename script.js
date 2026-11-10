@@ -16,6 +16,7 @@ const calendarioFijoPorDia = {
     10: "Jordan Greenway"
 };
 
+// Función para cambiar de pantalla en el menú principal (Arreglada)
 function irASeccion(idSeccion) {
     document.getElementById('pantalla-inicio').style.display = 'none';
     document.querySelectorAll('.seccion-juego').forEach(sec => sec.style.display = 'none');
@@ -27,6 +28,7 @@ function irASeccion(idSeccion) {
     }
 }
 
+// Función para regresar al menú principal
 function volverAlInicio() {
     document.querySelectorAll('.seccion-juego').forEach(sec => sec.style.display = 'none');
     document.getElementById('pantalla-inicio').style.display = 'flex';
@@ -36,7 +38,7 @@ function inicializarCalendarioDias() {
     const grid = document.getElementById("grid-dias-calendario");
     if (!grid) return;
     grid.innerHTML = "";
-    grid.style.display = "grid"; // Asegura que el panel sea visible al entrar
+    grid.style.display = "grid"; 
 
     // Genera exactamente los 10 días solicitados
     for (let i = 1; i <= 10; i++) {
@@ -71,14 +73,6 @@ function seleccionarDiaJuego(dia) {
     document.querySelectorAll(".btn-dia").forEach(b => b.classList.remove("activo"));
     const btnActivo = document.getElementById(`btn-dia-${dia}`);
     if (btnActivo) btnActivo.classList.add("activo");
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-    // La carga inicial se maneja al pulsar los botones del menú de inicio
-});
-
-function inicializarBuscadorJuego() {
-    // El buscador ya se gestiona mediante eventos nativos en tu HTML
 }
 
 // Escucha en tiempo real la escritura del usuario en el buscador
