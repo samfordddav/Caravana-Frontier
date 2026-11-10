@@ -98,9 +98,11 @@ function inicializarCalendarioDias() {
     if (!grid) return;
     grid.innerHTML = "";
 
-    if (listaDesordenadaPorDia.length === 0) {
+      if (listaDesordenadaPorDia.length === 0) {
         generarRetosAleatorios();
+        if (listaDesordenadaPorDia.length === 0) return; // Si sigue vacía, frena el bucle de golpe
     }
+
 
     for (let i = 1; i <= 30; i++) {
         const btn = document.createElement("button");
