@@ -253,28 +253,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (inputEquipo && cajaEquipo) {
-        inputEquipo.addEventListener("input", () => {
-            if (typeof jugadores === 'undefined') return;
-            const txt = inputEquipo.value.toLowerCase();
-            cajaEquipo.innerHTML = "";
-            if (!txt) return;
-
-            const encontrados = jugadores.filter(j => j.nombre.toLowerCase().includes(txt));
-            
-            encontrados.forEach(j => {
-                const item = document.createElement("div");
-                item.className = "sugerencia-item";
-                const img = j.foto ? `<img src="${j.foto}" class="sugerencia-img" onerror="this.src='https://placehold.co'">` : '';
-                item.innerHTML = `${img}<span>${j.nombre} (${j.equipo})</span>`;
-                item.addEventListener("click", () => {
-                    alert("Seleccionado: " + j.nombre);
-                    inputEquipo.value = "";
-                    cajaEquipo.innerHTML = "";
-                });
-                cajaEquipo.appendChild(item);
-            });
-        });
-    }
-});
-
+  
