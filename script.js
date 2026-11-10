@@ -250,7 +250,3 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 cajaSugerencias.appendChild(item);
             });
-        });
-    }
-
-  
