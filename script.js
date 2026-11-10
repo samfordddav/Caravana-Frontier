@@ -30,7 +30,7 @@ const jugadores = [
     { nombre: "Gazelle", equipo: "Polvo de Diamantes", posicion: "Delantero", elemento: "Viento", foto: "gazelle.webp", logoEquipo: "logo_diamantes.webp" },
     { nombre: "Paolo Bianchi", equipo: "Orfeo", posicion: "Delantero", elemento: "Viento", foto: "paolo.webp", logoEquipo: "logo_orfeo.webp" },
     { nombre: "Hector Helio", equipo: "The Little Giants", posicion: "Portero", elemento: "Tierra", foto: "hector.webp", logoEquipo: "logo_giants.webp" },
-    { nombre: "Edgar Partinus", equipo: "Los Emperadores", posicion: "Delantero", elemento: "Bosque", foto: "edgar.webp", logoEquipo: "logo_emperadores.webp" }
+    { nombre: "Edgar Partinus", equipo: "Los Emperadores", posicion: "Delantero", elemento: "Bosque", foto: "edgar.webp", logoEquipo: "logo_emperadores.webp" },
     { nombre: "Lars Luceafăr", equipo: "El Ogro", posicion: "Portero", elemento: "Tierra", foto: "luceafar.webp", logoEquipo: "logo_ogro.webp" },
     { nombre: "Bump Trungus", equipo: "El Ogro", posicion: "Defensa", elemento: "Fuego", foto: "trungus_b.webp", logoEquipo: "logo_ogro.webp" },
     { nombre: "Lump Trungus", equipo: "El Ogro", posicion: "Defensa", elemento: "Viento", foto: "trungus_l.webp", logoEquipo: "logo_ogro.webp" },
