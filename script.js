@@ -226,9 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const txt = inputBuscador.value.toLowerCase();
             cajaSugerencias.innerHTML = "";
             if (!txt) return;
- const encontrados = jugadores.filter(j => 
-                j.nombre.toLowerCase().includes(txt) && !jugadoresIntentados.includes(j.nombre)
-            );
+        const encontrados = jugadores.filter(j => j.nombre.toLowerCase().includes(txt) && (typeof jugadoresIntentados !== 'undefined' ? !jugadoresIntentados.includes(j.nombre) : true));
+
             
             encontrados.forEach(j => {
                 const item = document.createElement("div");
