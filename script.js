@@ -75,6 +75,7 @@ const jugadores = [
     { nombre: "Ken Cake", equipo: "Kids FC", posicion: "Delantero", elemento: "Tierra", foto: "cake.webp", logoEquipo: "logo_kids_fc.webp" },
     { nombre: "Mitch Grumble", equipo: "Kids FC", posicion: "Centrocampista", elemento: "Viento", foto: "grumble.webp", logoEquipo: "logo_kids_fc.webp" }
 ];
+const jugadoresIntentados = [];
 let jugadoresIntentados = [];
 let listaDesordenadaPorDia = [];
 let jugadorSecreto = null;
@@ -230,8 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const txt = inputBuscador.value.toLowerCase();
             cajaSugerencias.innerHTML = "";
             if (!txt) return;
-const jugadoresIntentados = [];
-            const encontrados = jugadores.filter(j => 
+ const encontrados = jugadores.filter(j => 
                 j.nombre.toLowerCase().includes(txt) && !jugadoresIntentados.includes(j.nombre)
             );
             
