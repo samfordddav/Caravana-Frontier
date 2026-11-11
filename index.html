@@ -160,6 +160,22 @@
         <div class="buscador-contenedor"><input type="text" id="buscador-tecnicas" placeholder="Ej: Tornado de Fuego..." autocomplete="off"><div id="sugerencias-tecnicas" class="sugerencias"></div></div>
         <table class="tabla-intentos"><thead><tr><th>Supertécnica</th><th>Tipo</th><th>Elemento</th></tr></thead><tbody id="lista-intentos-tecnicas"></tbody></table>
     </div>
+    <!-- Botón flotante de Anuncios arriba a la derecha -->
+<button onclick="document.getElementById('modal-anuncios').style.display='flex'" style="position: fixed; top: 20px; right: 20px; background: #1e293b; color: #38bdf8; border: 1px solid #38bdf8; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; z-index: 999;">
+    📢 Anuncios
+</button>
+
+<!-- Ventana emergente del menú de anuncios -->
+<div id="modal-anuncios" onclick="if(event.target === this) this.style.display='none'" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); justify-content: center; align-items: center; z-index: 1000;">
+    <div style="background: #0f172a; border: 1px solid #38bdf8; border-radius: 12px; padding: 25px; width: 90%; max-width: 400px; text-align: center; color: white; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+        <h2 style="color: #38bdf8; margin-top: 0; margin-bottom: 15px;">📢 Tablón de Anuncios</h2>
+        <p style="color: #cbd5e1; font-size: 16px; margin-bottom: 20px;">De momento no hay anuncios disponibles.</p>
+        <button onclick="document.getElementById('modal-anuncios').style.display='none'" style="background: #38bdf8; color: #0f172a; border: none; padding: 8px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+            Cerrar
+        </button>
+    </div>
+</div>
+
     <script src="script.js"></script>
     <script src="interfaz.js"></script>
 </body>
