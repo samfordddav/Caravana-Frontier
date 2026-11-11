@@ -233,7 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
             encontrados.forEach(j => {
                 const item = document.createElement("div");
                 item.className = "sugerencia-item";
-                              const img = j.foto ? `<img src="${j.foto}" class="sugerencia-img">` : '';
+                                        const img = j.foto ? `<img src="${j.foto}" class="sugerencia-img" style="width:35px; height:35px; object-fit:cover; border-radius:4px; margin-right:10px; vertical-align:middle;">` : '';
+
 
                             item.innerHTML = `${img}<span>${j.nombre}</span>`;
             item.addEventListener("click", () => {
