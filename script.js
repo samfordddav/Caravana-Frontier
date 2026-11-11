@@ -126,6 +126,7 @@ function seleccionarDiaJuego(dia) {
 }
 
 window.onload = function() {
+       generarRetosAleatorios();
     inicializarCalendarioDias();
 };
 
