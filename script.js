@@ -233,6 +233,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 const item = document.createElement("div");
                 item.className = "sugerencia-item";
                               const img = j.foto ? `<img src="${j.foto}" class="sugerencia-img">` : '';
+
+                            item.innerHTML = `${img}<span>${j.nombre}</span>`;
+            item.addEventListener("click", () => {
+
                     comprobarJugador(j);
                     inputBuscador.value = "";
                     cajaSugerencias.innerHTML = "";
