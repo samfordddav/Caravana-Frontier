@@ -1,4 +1,4 @@
-const jugadores = [
+var jugadores = [
     { nombre: "Mark Evans", equipo: "Raimon", posicion: "Portero", elemento: "Tierra", foto: "mark.webp", logoEquipo: "logo_raimon.webp" },
     { nombre: "Axel Blaze", equipo: "Raimon", posicion: "Delantero", elemento: "Fuego", foto: "axel.webp", logoEquipo: "logo_raimon.webp" },
     { nombre: "Jude Sharp", equipo: "Royal Academy", posicion: "Centrocampista", elemento: "Bosque", foto: "jude.webp", logoEquipo: "logo_royal.webp" },
