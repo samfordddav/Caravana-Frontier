@@ -164,6 +164,9 @@ function inicializarCalendarioDias() {
 function seleccionarDiaJuego(dia) {
     diaSeleccionado = dia;
     jugadorSecreto = listaDesordenadaPorDia[dia - 1];
+       jugadoresIntentados = [];
+    if (document.getElementById("buscador")) document.getElementById("buscador").disabled = false;
+
     
     document.getElementById("lista-intentos").innerHTML = "";
     document.getElementById("alerta-victoria").style.display = "none";
@@ -190,7 +193,7 @@ if (buscador) {
         sugerenciasDiv.innerHTML = "";
         if (!texto) return;
 
-        const filtrados = jugadores.filter(j => j.nombre.toLowerCase().includes(texto));
+          const filtrados = jugadores.filter(j => j.nombre.toLowerCase().includes(texto) && !jugadoresIntentados.includes(j.nombre));
         
         filtrados.forEach(j => {
             const div = document.createElement("div");
@@ -243,11 +246,18 @@ function comprobarJugador(jugador) {
 
     listaIntentos.insertBefore(fila, listaIntentos.firstChild);
 
+        if (!jugadoresIntentados.includes(jugador.nombre)) {
+        jugadoresIntentados.push(jugador.nombre);
+    }
+
     if (jugador.nombre === jugadorSecreto.nombre) {
         document.getElementById("alerta-victoria").style.display = "block";
         const btnGanado = document.getElementById(`btn-dia-${diaSeleccionado}`);
         if (btnGanado) btnGanado.classList.add("completado");
+        const cajaInput = document.getElementById("buscador");
+        if (cajaInput) cajaInput.disabled = true;
     }
+       
 }
 
 function cambiarDificultad(nivel) {
