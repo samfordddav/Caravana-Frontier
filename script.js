@@ -188,7 +188,10 @@ function comprobarJugador(jugador) {
     const contenidoPosicion = `${logoPosHtml}<div>${jugador.posicion}</div>`;
     fila.appendChild(crearCelda(jugador.posicion, jugadorSecreto.posicion, contenidoPosicion));
 
-    fila.appendChild(crearCelda(jugador.elemento, jugadorSecreto.elemento));
+        // Celda Elemento con Logo Dinámico
+    const logoElemHtml = jugador.logoElemento ? `<div style="width:30px; height:30px; margin:0 auto 4px auto; display:flex; align-items:center; justify-content:center;"><img src="${jugador.logoElemento}" style="width:100%; height:100%; object-fit:contain;"></div>` : '';
+    const contenidoElemento = `${logoElemHtml}<div>${jugador.elemento}</div>`;
+    fila.appendChild(crearCelda(jugador.elemento, jugadorSecreto.elemento, contenidoElemento));
 
     listaIntentos.insertBefore(fila, listaIntentos.firstChild);
 
