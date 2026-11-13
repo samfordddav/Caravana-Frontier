@@ -15,7 +15,7 @@
         }
         h1 { color: #4cc9f0; font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 0 10px rgba(76, 201, 240, 0.6); }
         .subtitulo { color: #aaaaaa; margin-bottom: 40px; }
-               #pantalla-menu { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 960px; margin: 0 auto; }
+               #pantalla-menu { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1250px;; margin: 0 auto; }
         .btn-modo { display: flex; flex-direction: column; align-items: center; width: 270px; background-color: rgba(28, 37, 65, 0.9); color: white; border: 2px solid #4cc9f0; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .btn-modo img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; border: 1px solid #3a506b; }
         .btn-modo:hover { background-color: #4cc9f0; color: #0b132b; transform: scale(1.05); box-shadow: 0 0 15px #4cc9f0; }
@@ -83,6 +83,10 @@
         <button class="btn-modo" onclick="mostrarModo('adivinar-tecnica')">
             <img src="FOTO_TECNICA.jpg" alt="Adivinar Supertécnica">
             <span>⚡ Adivinar Supertécnica</span>
+            </button>
+              <button class="btn-modo" onclick="mostrarModo('duelos')">
+            <img src="TU_FOTO_DUELOS.jpg" alt="¿Quién es mejor?">
+            <span>⚔️ ¿Quién es mejor?</span>
         </button>
     </div>
 
@@ -171,6 +175,39 @@
         <div class="buscador-contenedor"><input type="text" id="buscador-tecnicas" placeholder="Ej: Tornado de Fuego..." autocomplete="off"><div id="sugerencias-tecnicas" class="sugerencias"></div></div>
         <table class="tabla-intentos"><thead><tr><th>Supertécnica</th><th>Tipo</th><th>Elemento</th></tr></thead><tbody id="lista-intentos-tecnicas"></tbody></table>
     </div>
+        <!-- MODO 4: ¿QUIÉN ES MEJOR? (DUELOS) -->
+    <div id="pantalla-duelos">
+        <button class="btn-volver" onclick="mostrarMenu()">⬅ Volver al menú</button>
+        <h2 style="color: #4cc9f0; margin-bottom: 5px;">⚔️ ¿Quién es mejor?</h2>
+        <p style="color: #aaaaaa; margin-bottom: 25px;">Elige a tu favorito y descubre qué opina la mayoría</p>
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 25px; flex-wrap: wrap; max-width: 750px; margin: 0 auto;">
+            
+            <!-- JUGADOR 1 -->
+            <div id="duelo-card-1" onclick="elegirEnDuelo(1)" style="background: rgba(28, 37, 65, 0.95); border: 2px solid #4cc9f0; border-radius: 12px; padding: 20px; width: 250px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
+                <img id="duelo-img-1" src="" alt="" style="width: 140px; height: 140px; object-fit: cover; border-radius: 10px; border: 2px solid #3a506b; margin-bottom: 12px;">
+                <h3 id="duelo-nombre-1" style="margin: 0 0 6px 0; color: white; font-size: 20px;"></h3>
+                <p id="duelo-equipo-1" style="margin: 0 0 12px 0; color: #4cc9f0; font-size: 14px; font-weight: bold;"></p>
+                <div id="duelo-porcentaje-1" style="display: none; font-size: 28px; font-weight: bold; color: #ffb703; margin-top: 10px;"></div>
+            </div>
+
+            <div style="font-size: 28px; font-weight: bold; color: #4cc9f0;">VS</div>
+
+            <!-- JUGADOR 2 -->
+            <div id="duelo-card-2" onclick="elegirEnDuelo(2)" style="background: rgba(28, 37, 65, 0.95); border: 2px solid #4cc9f0; border-radius: 12px; padding: 20px; width: 250px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
+                <img id="duelo-img-2" src="" alt="" style="width: 140px; height: 140px; object-fit: cover; border-radius: 10px; border: 2px solid #3a506b; margin-bottom: 12px;">
+                <h3 id="duelo-nombre-2" style="margin: 0 0 6px 0; color: white; font-size: 20px;"></h3>
+                <p id="duelo-equipo-2" style="margin: 0 0 12px 0; color: #4cc9f0; font-size: 14px; font-weight: bold;"></p>
+                <div id="duelo-porcentaje-2" style="display: none; font-size: 28px; font-weight: bold; color: #ffb703; margin-top: 10px;"></div>
+            </div>
+
+        </div>
+
+        <button id="btn-siguiente-duelo" onclick="siguienteDuelo()" style="display: none; background-color: #4cc9f0; color: #0b132b; border: none; padding: 12px 28px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 25px; transition: 0.3s;">
+            Siguiente duelo ➡
+        </button>
+    </div>
+
     <!-- Botón flotante de Anuncios arriba a la derecha -->
 <button onclick="document.getElementById('modal-anuncios').style.display='flex'" style="position: fixed; top: 20px; right: 20px; background: #1e293b; color: #38bdf8; border: 1px solid #38bdf8; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; z-index: 999;">
     📢 Anuncios
