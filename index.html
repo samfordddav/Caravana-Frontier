@@ -15,8 +15,9 @@
         }
         h1 { color: #4cc9f0; font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 0 10px rgba(76, 201, 240, 0.6); }
         .subtitulo { color: #aaaaaa; margin-bottom: 40px; }
-        #pantalla-menu { display: flex; flex-direction: column; gap: 20px; max-width: 300px; margin: 0 auto; }
-        .btn-modo { background-color: rgba(28, 37, 65, 0.9); color: white; border: 2px solid #4cc9f0; padding: 15px 20px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+               #pantalla-menu { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 960px; margin: 0 auto; }
+        .btn-modo { display: flex; flex-direction: column; align-items: center; width: 270px; background-color: rgba(28, 37, 65, 0.9); color: white; border: 2px solid #4cc9f0; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .btn-modo img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; border: 1px solid #3a506b; }
         .btn-modo:hover { background-color: #4cc9f0; color: #0b132b; transform: scale(1.05); box-shadow: 0 0 15px #4cc9f0; }
         #pantalla-juego, #pantalla-creador-equipo, #pantalla-tecnicas { display: none; }
         .btn-volver { background: none; border: none; color: #4cc9f0; cursor: pointer; font-size: 16px; margin-bottom: 20px; text-decoration: underline; }
@@ -68,13 +69,23 @@
     </style>
 </head>
 <body>
-    <h1>Caravana Frontier</h1>
+      <h1>Caravana Frontier</h1>
+    <p class="subtitulo">Selecciona un modo de juego</p>
     <div id="pantalla-menu">
-        <p class="subtitulo">Selecciona un modo de juego</p>
-        <button class="btn-modo" onclick="mostrarModo('adivinar-jugador')">⚽ Adivinar Jugador</button>
-        <button class="btn-modo" onclick="mostrarModo('crear-equipo')">📋 Creador de Equipos</button>
-        <button class="btn-modo" onclick="mostrarModo('adivinar-tecnica')">⚡ Adivinar Supertécnica</button>
+        <button class="btn-modo" onclick="mostrarModo('adivinar-jugador')">
+            <img src="FOTO_JUGADOR.webp" alt="Adivinar Jugador">
+            <span>⚽ Adivinar Jugador</span>
+        </button>
+        <button class="btn-modo" onclick="mostrarModo('crear-equipo')">
+            <img src="FOTO_EQUIPO.webp" alt="Creador de Equipos">
+            <span>📋 Creador de Equipos</span>
+        </button>
+        <button class="btn-modo" onclick="mostrarModo('adivinar-tecnica')">
+            <img src="FOTO_TECNICA.webp" alt="Adivinar Supertécnica">
+            <span>⚡ Adivinar Supertécnica</span>
+        </button>
     </div>
+
     <!-- MODO 1: ADIVINAR JUGADOR -->
     <div id="pantalla-juego">
         <button class="btn-volver" onclick="mostrarMenu()">⬅️ Volver al menú</button>
