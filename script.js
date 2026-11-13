@@ -308,15 +308,13 @@ function dibujarFilaIntento(jugador) {
     const contenidoEquipo = `${logoHtml}<div>${jugador.equipo}</div>`;
 
     fila.appendChild(crearCelda(jugador.equipo, jugadorSecreto.equipo, contenidoEquipo));
-       // Celda Posición con Logo Dinámico
-    const logoPosHtml = jugador.logoPosicion ? `<div style="width:30px; height:30px; margin:0 auto 4px auto; display:flex; align-items:center; justify-content:center;"><img src="${jugador.logoPosicion}" style="width:100%; height:100%; object-fit:contain;"></div>` : '';
-    const contenidoPosicion = `${logoPosHtml}<div>${jugador.posicion}</div>`;
-    fila.appendChild(crearCelda(jugador.posicion, jugadorSecreto.posicion, contenidoPosicion));
+    '    // Celda Posición con Logo Dinámico (Solo icono)
+    const logoPosHtml = jugador.logoPosicion ? `<div style="width:42px; height:42px; margin:0 auto; display:flex; align-items:center; justify-content:center;"><img src="${jugador.logoPosicion}" style="width:100%; height:100%; object-fit:contain;"></div>` : jugador.posicion;
+    fila.appendChild(crearCelda(jugador.posicion, jugadorSecreto.posicion, logoPosHtml));
 
-        // Celda Elemento con Logo Dinámico
-    const logoElemHtml = jugador.logoElemento ? `<div style="width:30px; height:30px; margin:0 auto 4px auto; display:flex; align-items:center; justify-content:center;"><img src="${jugador.logoElemento}" style="width:100%; height:100%; object-fit:contain;"></div>` : '';
-    const contenidoElemento = `${logoElemHtml}<div>${jugador.elemento}</div>`;
-    fila.appendChild(crearCelda(jugador.elemento, jugadorSecreto.elemento, contenidoElemento));
+    // Celda Elemento con Logo Dinámico (Solo icono)
+    const logoElemHtml = jugador.logoElemento ? `<div style="width:42px; height:42px; margin:0 auto; display:flex; align-items:center; justify-content:center;"><img src="${jugador.logoElemento}" style="width:100%; height:100%; object-fit:contain;"></div>` : jugador.elemento;
+    fila.appendChild(crearCelda(jugador.elemento, jugadorSecreto.elemento, logoElemHtml));
 
     listaIntentos.insertBefore(fila, listaIntentos.firstChild);
 
