@@ -14,8 +14,11 @@ function mostrarModo(modo) {
         document.getElementById("pantalla-creador-equipo").style.display = "block";
         actualizarFotoEntrenador(); // Carga el entrenador por defecto
         cambiarFormacionCampo();    // Dibuja la alineación por defecto
-    } else if (modo === 'adivinar-tecnica') {
+       } else if (modo === 'adivinar-tecnica') {
         document.getElementById("pantalla-tecnicas").style.display = "block";
+    } else if (modo === 'duelos') {
+        document.getElementById("pantalla-duelos").style.display = "block";
+        iniciarDuelos();
     }
 }
 
@@ -23,6 +26,7 @@ function mostrarMenu() {
     document.getElementById("pantalla-juego").style.display = "none";
     document.getElementById("pantalla-creador-equipo").style.display = "none";
     document.getElementById("pantalla-tecnicas").style.display = "none";
+        document.getElementById("pantalla-duelos").style.display = "none";
     document.getElementById("pantalla-menu").style.display = "flex";
 }
 
@@ -169,4 +173,120 @@ function exportarAlineacion() {
     });
 
     alert(mensaje);
+}
+// ==========================================
+// MODO 4: ¿QUIÉN ES MEJOR? (DUELOS)
+// ==========================================
+const fotosExtraDuelos = {
+    "Shawn Froste": "shawn.webp",
+    "Hector Helio": "hector.webp",
+    "Jude Sharp": "jude.webp",
+    "Caleb Stonewall": "caleb.webp",
+    "Xavier Foster": "xavier.webp",
+    "Torch": "torch.webp",
+    "Gazelle": "gazelle.webp",
+    "Paolo Bianchi": "paolo.webp",
+    "Edgar Partinus": "edgar.webp",
+    "Arion Sherwind": "arion.webp",
+    "Victor Blade": "victor.webp",
+    "Bai Long": "bailong.webp",
+    "Tezcat": "tezcat.webp",
+    "Zanark Avalonic": "zanark.webp",
+    "Simeon Ayp (Saru)": "saru.webp",
+    "Fei Rune": "fei.webp",
+    "Sol Daystar": "sol.webp",
+    "Riccardo Di Rigo": "riccardo.webp",
+    "Goldie Lemmon": "goldie.webp",
+    "Gabriel García (Gabi)": "gabi.webp",
+    "Jean-Pierre Lapin (JP)": "jp.webp",
+    "Terry Archibald": "terry.webp",
+    "Ozrock Varga": "ozrock.webp",
+    "Sonny Wright (Asuto)": "asuto.webp",
+    "Elliot Ember (Haizaki)": "haizaki.webp",
+    "Heath Moore (Nosaka)": "nosaka.webp",
+    "Aiden Froste": "aiden.webp"
+};
+
+const duelosPersonalizados = [
+    { jugador1: "Axel Blaze", porcentaje1: 64, jugador2: "Shawn Froste", porcentaje2: 36 },
+    { jugador1: "Mark Evans", porcentaje1: 83, jugador2: "Hector Helio", porcentaje2: 17 },
+    { jugador1: "Jude Sharp", porcentaje1: 79, jugador2: "Caleb Stonewall", porcentaje2: 21 },
+    { jugador1: "Byron Love", porcentaje1: 63, jugador2: "Xavier Foster", porcentaje2: 37 },
+    { jugador1: "Torch", porcentaje1: 77, jugador2: "Gazelle", porcentaje2: 23 },
+    { jugador1: "Paolo Bianchi", porcentaje1: 89, jugador2: "Edgar Partinus", porcentaje2: 11 },
+    { jugador1: "Bash Lancer", porcentaje1: 13, jugador2: "Mark Evans", porcentaje2: 87 },
+    { jugador1: "Arion Sherwind", porcentaje1: 53, jugador2: "Victor Blade", porcentaje2: 47 },
+    { jugador1: "Bai Long", porcentaje1: 64, jugador2: "Tezcat", porcentaje2: 36 },
+    { jugador1: "Zanark Avalonic", porcentaje1: 68, jugador2: "Simeon Ayp (Saru)", porcentaje2: 32 },
+    { jugador1: "Fei Rune", porcentaje1: 23, jugador2: "Sol Daystar", porcentaje2: 77 },
+    { jugador1: "Riccardo Di Rigo", porcentaje1: 13, jugador2: "Jude Sharp", porcentaje2: 87 },
+    { jugador1: "Goldie Lemmon", porcentaje1: 42, jugador2: "Gabriel García (Gabi)", porcentaje2: 58 },
+    { jugador1: "Jean-Pierre Lapin (JP)", porcentaje1: 55, jugador2: "Terry Archibald", porcentaje2: 45 },
+    { jugador1: "Ozrock Varga", porcentaje1: 33, jugador2: "Zanark Avalonic", porcentaje2: 67 },
+    { jugador1: "Sonny Wright (Asuto)", porcentaje1: 25, jugador2: "Elliot Ember (Haizaki)", porcentaje2: 75 },
+    { jugador1: "Heath Moore (Nosaka)", porcentaje1: 24, jugador2: "Jude Sharp", porcentaje2: 76 },
+    { jugador1: "Axel Blaze", porcentaje1: 81, jugador2: "Elliot Ember (Haizaki)", porcentaje2: 19 },
+    { jugador1: "Shawn Froste", porcentaje1: 45, jugador2: "Aiden Froste", porcentaje2: 55 },
+    { jugador1: "Mark Evans", porcentaje1: 78, jugador2: "Arion Sherwind", porcentaje2: 22 }
+];
+
+let indiceDueloActual = 0;
+let dueloRespondido = false;
+
+function iniciarDuelos() {
+    indiceDueloActual = 0;
+    cargarDueloActual();
+}
+
+function obtenerDatosJugadorDuelo(nombre) {
+    const enLista = jugadores.find(j => j.nombre === nombre);
+    if (enLista) return enLista;
+    return { nombre: nombre, equipo: "", foto: fotosExtraDuelos[nombre] || "" };
+}
+
+function cargarDueloActual() {
+    dueloRespondido = false;
+    document.getElementById("btn-siguiente-duelo").style.display = "none";
+    document.getElementById("duelo-porcentaje-1").style.display = "none";
+    document.getElementById("duelo-porcentaje-2").style.display = "none";
+    document.getElementById("duelo-card-1").style.borderColor = "#4cc9f0";
+    document.getElementById("duelo-card-2").style.borderColor = "#4cc9f0";
+
+    const duelo = duelosPersonalizados[indiceDueloActual];
+    const j1 = obtenerDatosJugadorDuelo(duelo.jugador1);
+    const j2 = obtenerDatosJugadorDuelo(duelo.jugador2);
+
+    document.getElementById("duelo-img-1").src = j1.foto;
+    document.getElementById("duelo-nombre-1").innerText = j1.nombre;
+    document.getElementById("duelo-equipo-1").innerText = j1.equipo;
+    document.getElementById("duelo-porcentaje-1").innerText = duelo.porcentaje1 + "%";
+
+    document.getElementById("duelo-img-2").src = j2.foto;
+    document.getElementById("duelo-nombre-2").innerText = j2.nombre;
+    document.getElementById("duelo-equipo-2").innerText = j2.equipo;
+    document.getElementById("duelo-porcentaje-2").innerText = duelo.porcentaje2 + "%";
+}
+
+function elegirEnDuelo(opcion) {
+    if (dueloRespondido) return;
+    dueloRespondido = true;
+
+    document.getElementById("duelo-porcentaje-1").style.display = "block";
+    document.getElementById("duelo-porcentaje-2").style.display = "block";
+
+    if (opcion === 1) {
+        document.getElementById("duelo-card-1").style.borderColor = "#2a9d8f";
+    } else {
+        document.getElementById("duelo-card-2").style.borderColor = "#2a9d8f";
+    }
+
+    document.getElementById("btn-siguiente-duelo").style.display = "inline-block";
+}
+
+function siguienteDuelo() {
+    indiceDueloActual++;
+    if (indiceDueloActual >= duelosPersonalizados.length) {
+        indiceDueloActual = 0;
+    }
+    cargarDueloActual();
 }
