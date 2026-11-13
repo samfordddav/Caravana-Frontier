@@ -129,7 +129,8 @@ let jugadoresIntentados = [];
 let listaDesordenadaPorDia = [];
 let jugadorSecreto = null;
 let diaSeleccionado = null;
-
+let diasCompletados = JSON.parse(localStorage.getItem("caravanaDiasCompletados")) || [];
+let historialPorDia = JSON.parse(localStorage.getItem("caravanaHistorialDias")) || {};
 function generarRetosAleatorios() {
     let copiaJugadores = [...jugadores];
     listaDesordenadaPorDia = [];
@@ -153,6 +154,7 @@ function inicializarCalendarioDias() {
         const btn = document.createElement("button");
         btn.className = "btn-dia";
         btn.innerText = `Día ${i}`;
+               if (diasCompletados.includes(i)) btn.classList.add("completado");
         btn.id = `btn-dia-${i}`;
         btn.addEventListener("click", () => {
             seleccionarDiaJuego(i);
@@ -164,19 +166,32 @@ function inicializarCalendarioDias() {
 function seleccionarDiaJuego(dia) {
     diaSeleccionado = dia;
     jugadorSecreto = listaDesordenadaPorDia[dia - 1];
-       jugadoresIntentados = [];
-    if (document.getElementById("buscador")) document.getElementById("buscador").disabled = false;
-
-    
+    jugadoresIntentados = [];
     document.getElementById("lista-intentos").innerHTML = "";
-    document.getElementById("alerta-victoria").style.display = "none";
-    document.getElementById("contenedor-buscador-juego").style.display = "block";
-    document.getElementById("instrucciones-juego").innerText = `🎯 Reto del Día ${dia} activado. ¡Intenta adivinarlo!`;
 
     document.querySelectorAll(".btn-dia").forEach(b => b.classList.remove("activo"));
     const btnActivo = document.getElementById(`btn-dia-${dia}`);
     if (btnActivo) btnActivo.classList.add("activo");
+
+    if (diasCompletados.includes(dia)) {
+        document.getElementById("alerta-victoria").style.display = "block";
+        document.getElementById("contenedor-buscador-juego").style.display = "none";
+        document.getElementById("instrucciones-juego").innerText = `✅ Día ${dia} completado. El jugador era ${jugadorSecreto.nombre}.`;
+
+        const nombresGuardados = historialPorDia[dia] || [];
+        nombresGuardados.forEach(nombre => {
+            const jEncontrado = jugadores.find(j => j.nombre === nombre);
+            if (jEncontrado) dibujarFilaIntento(jEncontrado);
+        });
+        return;
+    }
+
+    if (document.getElementById("buscador")) document.getElementById("buscador").disabled = false;
+    document.getElementById("alerta-victoria").style.display = "none";
+    document.getElementById("contenedor-buscador-juego").style.display = "block";
+    document.getElementById("instrucciones-juego").innerText = `⚽ Reto del Día ${dia} activado. ¡Intenta adivinarlo!`;
 }
+
 
 window.onload = function() {
        generarRetosAleatorios();
@@ -211,6 +226,30 @@ if (buscador) {
 }
 
 function comprobarJugador(jugador) {
+    dibujarFilaIntento(jugador);
+
+    if (!jugadoresIntentados.includes(jugador.nombre)) {
+        jugadoresIntentados.push(jugador.nombre);
+    }
+
+    if (jugador.nombre === jugadorSecreto.nombre) {
+        document.getElementById("alerta-victoria").style.display = "block";
+        const btnGanado = document.getElementById(`btn-dia-${diaSeleccionado}`);
+        if (btnGanado) btnGanado.classList.add("completado");
+        const cajaInput = document.getElementById("buscador");
+        if (cajaInput) cajaInput.disabled = true;
+
+        if (!diasCompletados.includes(diaSeleccionado)) {
+            diasCompletados.push(diaSeleccionado);
+            localStorage.setItem("caravanaDiasCompletados", JSON.stringify(diasCompletados));
+        }
+        historialPorDia[diaSeleccionado] = [...jugadoresIntentados];
+        localStorage.setItem("caravanaHistorialDias", JSON.stringify(historialPorDia));
+    }
+}
+
+function dibujarFilaIntento(jugador) {
+
 
     const fila = document.createElement("tr");
     
@@ -246,17 +285,7 @@ function comprobarJugador(jugador) {
 
     listaIntentos.insertBefore(fila, listaIntentos.firstChild);
 
-        if (!jugadoresIntentados.includes(jugador.nombre)) {
-        jugadoresIntentados.push(jugador.nombre);
-    }
-
-    if (jugador.nombre === jugadorSecreto.nombre) {
-        document.getElementById("alerta-victoria").style.display = "block";
-        const btnGanado = document.getElementById(`btn-dia-${diaSeleccionado}`);
-        if (btnGanado) btnGanado.classList.add("completado");
-        const cajaInput = document.getElementById("buscador");
-        if (cajaInput) cajaInput.disabled = true;
-    }
+      
        
 }
 
