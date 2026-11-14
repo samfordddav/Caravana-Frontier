@@ -384,7 +384,8 @@ function dibujarFilaIntento(jugador) {
     // Celda de Jugador
     const tdJugador = document.createElement("td");
     const imgHtml = jugador.foto ? `<div style="width:55px; height:55px; border-radius:8px; overflow:hidden; margin:0 auto 4px auto;"><img src="${jugador.foto}" style="width:100%; height:100%; object-fit:cover; object-position:center;"></div>` : '';
-    tdJugador.innerHTML = `${imgHtml}${jugador.nombre}`;
+       tdJugador.innerHTML = imgHtml;
+       tdJugador.title = jugador.nombre;
     tdJugador.className = (jugador.nombre === jugadorSecreto.nombre) ? "verde" : "rojo";
     fila.appendChild(tdJugador);
 
