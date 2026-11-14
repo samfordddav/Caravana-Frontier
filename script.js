@@ -414,7 +414,7 @@ function dibujarFilaIntento(jugador) {
     // Celda Saga / Temporada (Por defecto Inazuma Eleven 1)
     const sagaJugador = jugador.saga || "IE1";
     const sagaSecreta = jugadorSecreto.saga || "IE1";
-    const logoSagaArchivo = jugador.logoSaga || "20220929144557!Inazuma-eleven-logo.jpg";
+    const logoSagaArchivo = jugador.logoSaga || "aaaa.webp";
     const logoSagaHtml = '<div style="width:110px; height:55px; margin:0 auto; display:flex; align-items:center; justify-content:center;"><img src="' + logoSagaArchivo + '" style="width:100%; height:100%; object-fit:contain; mix-blend-mode: multiply;"></div>';
     fila.appendChild(crearCelda(sagaJugador, sagaSecreta, logoSagaHtml));
 
