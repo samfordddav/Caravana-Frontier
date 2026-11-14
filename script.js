@@ -383,39 +383,41 @@ function dibujarFilaIntento(jugador) {
     
     // Celda de Jugador
     const tdJugador = document.createElement("td");
-    const imgHtml = jugador.foto ? `<div style="width:55px; height:55px; border-radius:8px; overflow:hidden; margin:0 auto 4px auto;"><img src="${jugador.foto}" style="width:100%; height:100%; object-fit:cover; object-position:center;"></div>` : '';
-       tdJugador.innerHTML = imgHtml;
-       tdJugador.title = jugador.nombre;
+      const imgHtml = jugador.foto ? '<div style="width:78px; height:78px; border-radius:8px; overflow:hidden; margin:0 auto;"><img src="' + jugador.foto + '" style="width:100%; height:100%; object-fit:cover; object-position:top;"></div>' : '';
+    tdJugador.innerHTML = imgHtml;
+    tdJugador.title = jugador.nombre;
     tdJugador.className = (jugador.nombre === jugadorSecreto.nombre) ? "verde" : "rojo";
     fila.appendChild(tdJugador);
 
     // Función para celdas normales
     function crearCelda(valorIntento, valorSecreto, innerContent) {
-        const td = document.createElement("td");
-        td.innerHTML = innerContent || valorIntento;
-        td.className = (valorIntento === valorSecreto) ? "verde" : "rojo";
-        return td;
+      const td = document.createElement("td");
+      td.innerHTML = innerContent || valorIntento;
+      td.className = (valorIntento === valorSecreto) ? "verde" : "rojo";
+      return td;
     }
 
     // Celda Equipo con Logo Dinámico
-    const logoHtml = jugador.logoEquipo ? `<div style="width:30px; height:30px; margin:0 auto 4px auto; display:flex; align-items:center; justify-content:center;"><img src="${jugador.logoEquipo}" style="width:100%; height:100%; object-fit:contain;"></div>` : '';
-    const contenidoEquipo = `${logoHtml}<div>${jugador.equipo}</div>`;
+    const logoHtml = jugador.logoEquipo ? '<div style="width:48px; height:48px; margin:0 auto 4px auto; display:flex; align-items:center; justify-content:center;"><img src="' + jugador.logoEquipo + '" style="width:100%; height:100%; object-fit:contain;"></div>' : '';
+    const contenidoEquipo = logoHtml + '<div>' + jugador.equipo + '</div>';
 
     fila.appendChild(crearCelda(jugador.equipo, jugadorSecreto.equipo, contenidoEquipo));
-     // Celda Posicion con Logo Dinamico
-    const logoPosHtml = jugador.logoPosicion ? '<div style="width:42px; height:42px; margin:0 auto; display:flex; align-items:center; justify-content:center;"><img src="' + jugador.logoPosicion + '" style="width:100%; height:100%; object-fit:contain;"></div>' : jugador.posicion;
+
+    // Celda Posicion con Logo Dinamico
+    const logoPosHtml = jugador.logoPosicion ? '<div style="width:54px; height:54px; margin:0 auto; display:flex; align-items:center; justify-content:center;"><img src="' + jugador.logoPosicion + '" style="width:100%; height:100%; object-fit:contain;"></div>' : jugador.posicion;
     fila.appendChild(crearCelda(jugador.posicion, jugadorSecreto.posicion, logoPosHtml));
 
     // Celda Elemento con Logo Dinamico
-    const logoElemHtml = jugador.logoElemento ? '<div style="width:42px; height:42px; margin:0 auto; display:flex; align-items:center; justify-content:center;"><img src="' + jugador.logoElemento + '" style="width:100%; height:100%; object-fit:contain;"></div>' : jugador.elemento;
+    const logoElemHtml = jugador.logoElemento ? '<div style="width:54px; height:54px; margin:0 auto; display:flex; align-items:center; justify-content:center;"><img src="' + jugador.logoElemento + '" style="width:100%; height:100%; object-fit:contain;"></div>' : jugador.elemento;
     fila.appendChild(crearCelda(jugador.elemento, jugadorSecreto.elemento, logoElemHtml));
- // Celda Saga / Temporada (Por defecto Inazuma Eleven 1)
- const sagaJugador = jugador.saga || "IE1";
- const sagaSecreta = jugadorSecreto.saga || "IE1";
- const logoSagaArchivo = jugador.logoSaga || "20220929144557!Inazuma-eleven-logo.jpg";
- const logoSagaHtml = '<div style="width:55px; height:42px; margin:0 auto; display:flex; align-items:center; justify-content:center;"><img src="' + logoSagaArchivo + '" style="width:100%; height:100%; object-fit:contain;"></div>';
- fila.appendChild(crearCelda(sagaJugador, sagaSecreta, logoSagaHtml));
 
+    // Celda Saga / Temporada (Por defecto Inazuma Eleven 1)
+    const sagaJugador = jugador.saga || "IE1";
+    const sagaSecreta = jugadorSecreto.saga || "IE1";
+    const logoSagaArchivo = jugador.logoSaga || "20220929144557!Inazuma-eleven-logo.jpg";
+    const logoSagaHtml = '<div style="width:110px; height:55px; margin:0 auto; display:flex; align-items:center; justify-content:center;"><img src="' + logoSagaArchivo + '" style="width:100%; height:100%; object-fit:contain; mix-blend-mode: multiply;"></div>';
+    fila.appendChild(crearCelda(sagaJugador, sagaSecreta, logoSagaHtml));
+D
 
     listaIntentos.insertBefore(fila, listaIntentos.firstChild);
 
