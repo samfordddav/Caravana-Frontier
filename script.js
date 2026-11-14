@@ -219,7 +219,7 @@ var jugadores = [
     { nombre: "Gus Heeley", equipo: "Instituto Zeus", posicion: "Defensa", elemento: "Viento", foto: "heeley.webp", logoEquipo: "logo_zeus.webp", logoPosicion: "DF.webp", logoElemento: "Aire.webp" },
     { nombre: "Harry Closs", equipo: "Instituto Zeus", posicion: "Centrocampista", elemento: "Bosque", foto: "closs.webp", logoEquipo: "logo_zeus.webp", logoPosicion: "MD.webp", logoElemento: "Bosque.webp" },
     { nombre: "Andy Chronic", equipo: "Instituto Zeus", posicion: "Delantero", elemento: "Viento", foto: "chronic.webp", logoEquipo: "logo_zeus.webp", logoPosicion: "DL.webp", logoElemento: "Aire.webp" },
-    { nombre: "Ned Yousef", equipo: "Instituto Zeus", posicion: "Delantero", elemento: "Bosque", foto: "yousef.webp", logoEquipo: "logo_zeus.webp", logoPosicion: "DL.webp", logoElemento: "Bosque.webp" }
+    { nombre: "Ned Yousef", equipo: "Instituto Zeus", posicion: "Delantero", elemento: "Bosque", foto: "yousef.webp", logoEquipo: "logo_zeus.webp", logoPosicion: "DL.webp", logoElemento: "Bosque.webp" },
      { nombre: "Joseph King", equipo: "Royal Academy", posicion: "Portero", elemento: "Fuego", foto: "king.webp", logoEquipo: "logo_royal.webp", logoPosicion: "PR.webp", logoElemento: "Fuego.webp" },
     { nombre: "Peter Drent", equipo: "Royal Academy", posicion: "Defensa", elemento: "Tierra", foto: "drent.webp", logoEquipo: "logo_royal.webp", logoPosicion: "DF.webp", logoElemento: "Tierra.webp" },
     { nombre: "Ben Simmons", equipo: "Royal Academy", posicion: "Defensa", elemento: "Bosque", foto: "simmons.webp", logoEquipo: "logo_royal.webp", logoPosicion: "DF.webp", logoElemento: "Bosque.webp" },
