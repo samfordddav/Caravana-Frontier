@@ -417,7 +417,7 @@ function dibujarFilaIntento(jugador) {
     const logoSagaArchivo = jugador.logoSaga || "20220929144557!Inazuma-eleven-logo.jpg";
     const logoSagaHtml = '<div style="width:110px; height:55px; margin:0 auto; display:flex; align-items:center; justify-content:center;"><img src="' + logoSagaArchivo + '" style="width:100%; height:100%; object-fit:contain; mix-blend-mode: multiply;"></div>';
     fila.appendChild(crearCelda(sagaJugador, sagaSecreta, logoSagaHtml));
-D
+
 
     listaIntentos.insertBefore(fila, listaIntentos.firstChild);
 
